@@ -1,0 +1,105 @@
+#!/bin/bash
+# SM Version 0.1
+# SynthMotion: The Easiest AppImage Builder
+# (AppImage version)
+# -----------------------------------------
+# Basic configuration 
+# -----------------------------------------
+
+# Getting app name
+NAME=${1:-app}
+
+# Getting app source
+SRC=${2:-src}
+
+# Default category when using Linux exporting
+CATEGORIES=${3:-Utility}
+
+# Creates necessary directories
+mkdir default.AppDir
+cd default.AppDir
+mkdir usr
+cd usr
+mkdir bin
+cd ..
+
+# -----------------------------------------
+# Creates a Desktop entry
+# -----------------------------------------
+
+cat <<EOT >> $NAME.desktop
+[Desktop Entry]
+Categories=$CATEGORIES;
+Exec=$NAME
+Icon=icon
+Name=$NAME
+Terminal=false
+Type=Application
+EOT
+
+# Goes back to root directory
+cd ..
+
+# -----------------------------------------------------------------------------------------------------------
+# Creating an AppRun: This part is tricky because some parts of the code should be executed while some don't
+# -----------------------------------------------------------------------------------------------------------
+
+# cleans file
+echo > AppRun
+
+# Note that a backslash was added at the of '.../usr/bin/' to add multiline support
+# And give access to AppRun to the name of the executable file
+cat <<\EOT >> AppRun 
+#!/bin/bash
+HERE="$(dirname "$(readlink -f "${0}")")"
+EXEC="${HERE}/usr/bin/\
+EOT
+
+# Removes first line of file to make header work
+tail -n +2 "AppRun" > "AppRun.tmp" && mv "AppRun.tmp" "AppRun"
+
+# Adds executable name
+echo "$NAME\"" >> AppRun
+
+# Adds the rest of the file
+cat <<\EOT >> AppRun
+exec "${EXEC}"
+EOT
+
+# Gives permissions to AppRun
+chmod +x AppRun
+
+# -----------------------------------------
+# File management section
+# -----------------------------------------
+
+# Here we copy the necessary files into respective paths
+cp -a $SRC/. default.AppDir/usr/bin
+cp AppRun default.AppDir/
+cp $SRC/icon.png default.AppDir/
+cp $APPDIR/usr/bin/data/appimagetool.AppImage .
+
+# -----------------------------------------
+# Building section
+# -----------------------------------------
+
+echo "Compiling app..."
+#ARCH=x86_64 ./appimagetool.AppImage default.AppDir
+ARCH=x86_64 ./appimagetool.AppImage default.AppDir >/dev/null 2>&1 && echo "Successful" || echo "Compilation error! Do you have an icon.png next to executable?"
+
+# -----------------------------------------
+# Post building section
+# -----------------------------------------
+
+rm AppRun
+rm appimagetool.AppImage
+rm -r default.AppDir
+# This line changes the name of the file
+mv $NAME-x86_64.AppImage $NAME.AppImage
+
+# -----------------------------------------
+# Launching the app
+# -----------------------------------------
+
+#echo "Running app.."
+#./$NAME.AppImage & disown

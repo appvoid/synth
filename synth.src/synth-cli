@@ -1,0 +1,125 @@
+#!/bin/bash
+# SM Version 0.1
+# SynthMotion: The Easiest AppImage Builder
+
+# -----------------------------------------
+# Changelog:
+# -----------------------------------------
+
+# > First version (0.1)
+# > Feature: A more modern theme was added. Dark mode support for file chooser will come in further releases.
+# > Feature: Choose an executable, get an appimage
+# > Feature: Minimalistic compiler console for basic error debugging
+
+# -----------------------------------------
+# Roadmap:
+# -----------------------------------------
+
+# Change categories
+# Change app name
+# Choose icon
+# AppImage preview: App name + extension, App icon, App size (estimated)
+# Dark mode toggle
+# Choose file button and compile button instead of just one button
+
+# -----------------------------------------
+# Basic configuration: 
+# -----------------------------------------
+
+# Getting app name (default is app)
+NAME=${1:-app}
+
+# Getting app source (default is src)
+SRC=${2:-src}
+
+# Categories when using Linux exporting (default is Utility)
+CATEGORIES=${3:-Utility}
+
+# Creates necessary directories
+mkdir default.AppDir
+cd default.AppDir
+mkdir usr
+cd usr
+mkdir bin
+cd ..
+
+# -----------------------------------------
+# Creates a Desktop entry:
+# -----------------------------------------
+
+cat <<EOT >> $NAME.desktop
+[Desktop Entry]
+Categories=$CATEGORIES;
+Exec=$NAME
+Icon=icon
+Name=$NAME
+Terminal=false
+Type=Application
+EOT
+
+# Goes back to root directory
+cd ..
+
+# -----------------------------------------------------------------------------------------------------------
+# Creating an AppRun: This part is tricky because some parts of the code should be executed while some don't
+# -----------------------------------------------------------------------------------------------------------
+
+# cleans file
+echo > AppRun
+
+# Note that a backslash was added at the of '.../usr/bin/' to add multiline support
+# And give access to AppRun to the name of the executable file
+cat <<\EOT >> AppRun 
+#!/bin/bash
+HERE="$(dirname "$(readlink -f "${0}")")"
+EXEC="${HERE}/usr/bin/\
+EOT
+
+# Removes first line of AppRun file to make header work since header (#!/bin/bash) must be at the top line
+tail -n +2 "AppRun" > "AppRun.tmp" && mv "AppRun.tmp" "AppRun"
+
+# Adds executable name
+echo "$NAME\"" >> AppRun
+
+# Adds the rest of the file
+cat <<\EOT >> AppRun
+exec "${EXEC}"
+EOT
+
+# Gives permissions to AppRun
+chmod +x AppRun
+
+# -----------------------------------------
+# File management section:
+# -----------------------------------------
+
+# Here we copy the necessary files into respective paths
+cp -a $SRC/. default.AppDir/usr/bin
+cp AppRun default.AppDir/
+cp $SRC/icon.png default.AppDir/
+cp $SRC/data/appimagetool.AppImage .
+
+# -----------------------------------------
+# Building section:
+# -----------------------------------------
+
+echo "Compiling app..."
+#ARCH=x86_64 ./appimagetool.AppImage default.AppDir (unmark this for appimagetool debugging) 
+ARCH=x86_64 ./appimagetool.AppImage default.AppDir >/dev/null 2>&1 && echo "Successful" || echo "Compilation error!" echo "Remember to have an icon.png next to an executable!"
+
+# -----------------------------------------
+# Post building section:
+# -----------------------------------------
+
+rm AppRun
+rm appimagetool.AppImage
+rm -r default.AppDir
+# This line changes the name of the file
+mv $NAME-x86_64.AppImage ../synth.dist/$NAME.AppImage
+
+# -----------------------------------------
+# Launching the app:
+# -----------------------------------------
+
+#echo "Running app.."
+#../synth.dist/$NAME.AppImage & disown

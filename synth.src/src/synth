@@ -1,0 +1,111 @@
+#!/usr/bin/env python3
+# import libraries
+import os
+from tabnanny import filename_only
+import tkinter as tk
+from tkinter import ttk
+from tkinter.filedialog import askopenfilename
+from PIL import Image, ImageTk
+
+# here we create a link getting the path where your app source mount is located
+src_dir = os.popen("echo $APPDIR/usr/bin/").read().rstrip()
+
+# general settings
+bgcolor = '#222'
+fgcolor = '#eee'
+
+# wrap app into a class
+class App(tk.Frame):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.pack()
+
+# create the application
+app = App()
+
+app.tk.call("source", src_dir+"azure.tcl")
+app.tk.call("set_theme", "light")
+app.option_add('*background', bgcolor)
+app.option_add('*Listbox*foreground', fgcolor)
+
+# here are method calls to the window manager class
+app.configure(bg=bgcolor)
+
+# here we create an icon for the app using the appimage source path
+icon_path = src_dir+"icon.png"
+app.master.wm_iconphoto(False, ImageTk.PhotoImage(Image.open(icon_path)))
+
+# creates basic window settings
+app.master.title('Early Build: Alpha 0.1')
+app.master.geometry('520x280+820+280')
+app.master.configure(bg=bgcolor)
+app.master.minsize(320, 240)
+
+# main ui
+label = tk.Label(app, text = 'Synth')
+label.config(bg=bgcolor, fg='#eee', font=('Inter',26, 'bold'))
+label.pack(padx=10,pady=40)
+
+label2 = tk.Label(app, text = 'Pick your executable clicking the button below')
+label2.config(bg=bgcolor, fg='#777', font=('Inter',10))
+label2.pack(padx=10,pady=0)
+
+style = ttk.Style()
+style.theme_use('azure-light')
+
+# Compiler popup
+def popup(s):
+    from sys import exit
+    popupRoot = tk.Tk()
+    popupRoot.option_add('*foreground', '#333')
+    popupRoot.option_add('*font', '#333')
+    popupRoot.option_add('*Label*font', '#333')
+    popupRoot.option_add('*Listbox*foreground', '#333')
+    popupRoot.option_add('*background', bgcolor)
+    popupRoot.option_add('*Entry*background', bgcolor)
+    popupRoot.configure(bg=bgcolor)
+    popupRoot.title('Compiler console')
+    # popupRoot.after(6000, popRoot.destroy())
+
+    popupLabel = tk.Label(popupRoot, text = s)
+    popupLabel.config(bg=bgcolor, fg='#888', font=('Inter',9))
+    popupLabel.pack(padx=5, pady=15)
+
+    popupButton = tk.Button(popupRoot, text = 'Close', font = ("Verdana", 9), activebackground='#444', activeforeground=fgcolor, border=0, command = lambda:popupRoot.destroy())
+    popupButton.config(border='0', bg='#333', fg=fgcolor, highlightthicknes=0)
+    popupButton.pack()
+
+    popupRoot.geometry('380x120+200+200')
+    popupRoot.mainloop()
+
+# compiler execution
+def run_compiler_process ():
+    # Gets paths
+    file_path = askopenfilename()
+    filename = file_path.split('/')[-1]
+    filename_chars = len(filename)
+    file_path = file_path[:-filename_chars]
+
+    # Debugging info
+    print('Getting paths...')
+    compiler_message = os.popen(src_dir+'./smai '+filename+' '+file_path).read()
+    print(compiler_message)
+    popup(compiler_message)
+
+button = tk.Button(app, text='Compile app', command=lambda:run_compiler_process(), activebackground='#444', activeforeground=fgcolor, border=0)
+button.config(bg='#333', fg=fgcolor, font=('Inter',8), border='0',highlightthicknes=0)
+button.pack(padx=10,pady=40)
+
+contextmenu = tk.Menu(app, tearoff = 0, bg='#222', fg='#eee', activeforeground='#eee', activebackground='#333', activeborderwidth=0)
+contextmenu.add_command(label ="About", font=('Inter', 9))
+
+def do_popup(event):
+    try:
+        contextmenu.tk_popup(event.x_root, event.y_root)
+    finally:
+        contextmenu.grab_release()
+
+app.master.bind("<Button-3>", do_popup)
+
+# makes app to wait for actions
+app.mainloop()

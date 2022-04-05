@@ -1,15 +1,18 @@
 #!/bin/bash
-# SM Version 0.1.0
+# SM Version 0.1.1
 # SynthMotion: The Easiest AppImage Builder
 
 # -----------------------------------------
 # Changelog:
 # -----------------------------------------
 
-# > First version (0.1)
+# > First version (0.1.0)
 # > Feature: A more modern theme was added. Dark mode support for file chooser will come in further releases.
 # > Feature: Choose an executable, get an appimage
 # > Feature: Minimalistic compiler console for basic error debugging
+
+# > Alpha 0.1.1
+# > File chooser dark theme support and proper handler when cancelling on file chooser was added
 
 # -----------------------------------------
 # Roadmap:

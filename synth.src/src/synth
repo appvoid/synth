@@ -24,9 +24,12 @@ class App(tk.Frame):
 app = App()
 
 app.tk.call("source", src_dir+"azure.tcl")
-app.tk.call("set_theme", "light")
+app.tk.call("set_theme", "dark")
 app.option_add('*background', bgcolor)
 app.option_add('*Listbox*foreground', fgcolor)
+
+style = ttk.Style()
+style.theme_use('azure-dark')
 
 # here are method calls to the window manager class
 app.configure(bg=bgcolor)
@@ -49,9 +52,6 @@ label.pack(padx=10,pady=40)
 label2 = tk.Label(app, text = 'Pick your executable clicking the button below')
 label2.config(bg=bgcolor, fg='#777', font=('Inter',10))
 label2.pack(padx=10,pady=0)
-
-style = ttk.Style()
-style.theme_use('azure-light')
 
 # Compiler popup
 def popup(s):
@@ -82,15 +82,20 @@ def popup(s):
 def run_compiler_process ():
     # Gets paths
     file_path = askopenfilename()
-    filename = file_path.split('/')[-1]
-    filename_chars = len(filename)
-    file_path = file_path[:-filename_chars]
 
-    # Debugging info
-    print('Getting paths...')
-    compiler_message = os.popen(src_dir+'./smai '+filename+' '+file_path).read()
-    print(compiler_message)
-    popup(compiler_message)
+    # If path has no file name it means operation was cancelled
+    if (str(file_path) != '()' and str(file_path) != ''):
+        filename = file_path.split('/')[-1]
+        filename_chars = len(filename)
+        file_path = file_path[:-filename_chars]
+
+        # Debugging info
+        print('Getting paths...')
+        compiler_message = os.popen(src_dir+'./smai '+filename+' '+file_path).read()
+        print(compiler_message)
+        popup(compiler_message)
+    else:
+        print("Operation was cancelled...")
 
 button = tk.Button(app, text='Compile app', command=lambda:run_compiler_process(), activebackground='#444', activeforeground=fgcolor, border=0)
 button.config(bg='#333', fg=fgcolor, font=('Inter',8), border='0',highlightthicknes=0)
@@ -99,12 +104,14 @@ button.pack(padx=10,pady=40)
 contextmenu = tk.Menu(app, tearoff = 0, bg='#222', fg='#eee', activeforeground='#eee', activebackground='#333', activeborderwidth=0)
 contextmenu.add_command(label ="About", font=('Inter', 9))
 
+# Simple contextmenu on Python
 def do_popup(event):
     try:
         contextmenu.tk_popup(event.x_root, event.y_root)
     finally:
         contextmenu.grab_release()
 
+# Button 3 means right click
 app.master.bind("<Button-3>", do_popup)
 
 # makes app to wait for actions

@@ -17,7 +17,7 @@ This is the bare minimum to make SynthMotion to compile your app into an appimag
 
 **Note** that if your app uses local resources, which is pretty common, you should be providing to your app the base directory path where your app is located when mounted, like this:
 
-``$APPDIR/usr/bin/``inside
+``$APPDIR/usr/bin/``
 
 For example, in a Python app, you should get the path of the project first and then use it to load your app's resources. Here's a simple way to achieve that:
 
@@ -28,6 +28,9 @@ Now we can use assets from within the AppImage:
 ``icon_path = src_dir+"icon.png"``
 
 ***
+
+### CLI
+There is a CLI version which is actually the main version. Essentially, this tool was designed to autoreplicate itself into an app version that replicates AppImages for your executables, but can also be used to make AppImages, actually, it's the only way to (not manually) set a category for the app.
 
 ## Contribuitors
 #### Big thanks to FreePik from FlatIcon

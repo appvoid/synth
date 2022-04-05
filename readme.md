@@ -2,6 +2,8 @@
 
 ### Tool for building appimages super easy!
 
+![synth_project](https://user-images.githubusercontent.com/78444142/161784980-0322cc73-26c1-4f5c-9eff-34ac5667782f.png)
+
 SynthMotion (or just Synth) is an appimage tool that let's you build appimages super easy. Just need to locate your app and done!
 
 ### Requirements

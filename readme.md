@@ -4,10 +4,14 @@
 
 ![synth_project](https://user-images.githubusercontent.com/78444142/161784980-0322cc73-26c1-4f5c-9eff-34ac5667782f.png)
 
-SynthMotion (or just Synth) is an appimage tool that let's you build appimages for Linux 🐧 super easy. Just need to locate your app and done!
+SynthMotion (or just Synth) is an appimage tool that let's you build appimages for Linux super easy. Just need to locate your app and done!
 
 ***
-### Requirements
+### 📝 **Requirements**
+
+- 🐧 Linux
+- 📄 Executable file
+- 🎴 PNG icon file
 
 Even though is super easy to create them, there are some things you need to consider when creating or porting your existing app to a SynthMotion app. You should have an executable file and an icon.png. Your app should contain an icon.png next to your executable, for example, you should have an structure like this:
 
@@ -15,7 +19,9 @@ app | icon.png
 
 This is the bare minimum to make SynthMotion to compile your app into an appimage.
 
-**Note** that if your app uses local resources, which is pretty common, you should be providing to your app the base directory path where your app is located when mounted, like this:
+**Note**
+
+If your app uses local resources, which is pretty common, you should be providing to your app the base directory path where your app is located when mounted, like this:
 
 ``$APPDIR/usr/bin/``
 
@@ -29,8 +35,25 @@ Now we can use assets from within the AppImage:
 
 ***
 
-### CLI
+### CLI 💻
 There is a CLI version which is actually the main version. Essentially, this tool was designed to autoreplicate itself into an app version that replicates AppImages for your executables, but can also be used to make AppImages, actually, it's the only way to (not manually) set a category for the app.
+****
+### **Usage** 🚩
+**DEV NOTE**: Things are still changing so expect breaking changes from different versions!
+
+``* means is optional``
+
+``./synth-cli compile <path-to-executable> <name*> <category*> ``
+
+****
+### ☕ **Donations and Support** 
+Buy me a coffee! Creating this kind of things is tedious sometimes and enjoyable also. When you support a developer, you really make it to work a lot happier 😄
+### [ 👉 **Donate using PayPal** ](https://www.paypal.com/donate/?hosted_button_id=CDZH8GJET9SNU)
+
+
+You can also spread the word! Share it with your nerd pals! Help fixing bugs! There is a lot you can do if you really wanna help me to create the most beautiful, simple and efficient way to create apps for Linux.
+
+****
 
 ## Contribuitors
 #### Big thanks to FreePik from FlatIcon

@@ -7,6 +7,11 @@
 SynthMotion (or just Synth) is an appimage tool that let's you build appimages for Linux super easy. Just need to locate your app and done!
 
 ***
+### 📝 **Quick install**
+No needed! Since it is an AppImge it works on virtually any distro! So you just need to type:
+
+``git clone https://github.com/appvoid/synth.git && ./synth/synth.dist/synth.AppImage``
+***
 ### 📝 **Requirements**
 
 - 🐧 Linux
@@ -35,10 +40,10 @@ Now we can use assets from within the AppImage:
 
 ***
 
-### CLI 💻
+### **CLI** 💻
 There is a CLI version which is actually the main version. Essentially, this tool was designed to autoreplicate itself into an app version that replicates AppImages for your executables, but can also be used to make AppImages, actually, it's the only way to (not manually) set a category for the app.
 ****
-### **Usage** 🚩
+### **Usage (CLI)** 🚩
 **DEV NOTE**: Things are still changing so expect breaking changes from different versions!
 
 ``* means is optional``
@@ -59,3 +64,8 @@ You can also spread the word! Share it with your nerd pals! Help fixing bugs! Th
 #### Big thanks to FreePik from FlatIcon
 For that amazing default icon for the app template.
 https://www.flaticon.com/free-icons/illustration
+
+## Support
+If you need better answers, chat with me here:
+nohakcoffee@gmail.com
+Remember to use the topic for subject "appvoid open source + your actual subject"

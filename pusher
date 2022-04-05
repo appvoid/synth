@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ $1 == "" ]]; then
+    echo "You should leave a comment on this new push"
+    exit
+else
+    git add .
+    git commit -m "$1"
+    git push -u origin master
+fi

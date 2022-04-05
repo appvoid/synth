@@ -61,10 +61,13 @@ You can also spread the word! Share it with your nerd pals! Help fixing bugs! Th
 ****
 
 ## Contribuitors
-#### Big thanks to FreePik from FlatIcon
+#### **Thanks to FreePik from FlatIcon**
 For that amazing default icon for the app template.
 https://www.flaticon.com/free-icons/illustration
 
+#### **Really BIG thanks to DT from YouTube!**
+For that amazing tutorial on AppImages, without him, this app wouldnt have existed! https://www.youtube.com/watch?v=Wy63jwjpNg4
+****
 ## Support
 If you need better answers, chat with me here:
 nohakcoffee@gmail.com

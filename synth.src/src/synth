@@ -36,7 +36,7 @@ icon_path = src_dir+"icon.png"
 app.master.wm_iconphoto(False, ImageTk.PhotoImage(Image.open(icon_path)))
 
 # creates basic window settings
-app.master.title('Early Build: Alpha 0.1')
+app.master.title('Early Build: Alpha 0.1.0')
 app.master.geometry('520x280+820+280')
 app.master.configure(bg=bgcolor)
 app.master.minsize(320, 240)

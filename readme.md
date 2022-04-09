@@ -54,7 +54,7 @@ There is a CLI version which is actually the main version. Essentially, this too
 ### ☕ **Donations and Support** 
 Buy me a coffee! Creating this kind of things is tedious sometimes and enjoyable also. When you support a developer, you really make it to work a lot happier 😄
 ### [ 👉 **Donate using PayPal** ](https://www.paypal.com/donate/?hosted_button_id=CDZH8GJET9SNU)
-
+### [ 👉 **Become a Patreon!** ](https://www.patreon.com/bePatron?u=52880328)
 
 You can also spread the word! Share it with your nerd pals! Help fixing bugs! There is a lot you can do if you really wanna help me to create the most beautiful, simple and efficient way to create apps for Linux.
 

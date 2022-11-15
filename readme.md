@@ -68,7 +68,12 @@ https://www.flaticon.com/free-icons/illustration
 #### **Really BIG thanks to DT from YouTube!**
 For that amazing tutorial on AppImages, without him, this app wouldnt have existed! https://www.youtube.com/watch?v=Wy63jwjpNg4
 ****
-## Support
+## Support and Troubleshooting
 If you need better answers, chat with me here:
 nohakcoffee@gmail.com
 Remember to use the topic for subject "appvoid open source + your actual subject"
+
+If an error related to FUSE appears, make sure to have installed FUSE:
+`sudo apt-get install fuse libfuse2`
+
+If it's still not working, check if the appimage is the actual architecture of your device.

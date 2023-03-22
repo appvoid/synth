@@ -10,7 +10,7 @@ SynthMotion (or just Synth) is an appimage tool that let's you build appimages f
 ### 📝 **Quick install**
 No needed! Since it is an AppImge it works on virtually any distro! So you just need to type:
 
-``git clone https://github.com/appvoid/synth.git && ./synth/synth.dist/synth.AppImage``
+``sudo apt-get install python3-pil python3-pil.imagetk && git clone https://github.com/appvoid/synth.git && ./synth/synth.dist/synth.AppImage``
 ***
 ### 📝 **Requirements**
 

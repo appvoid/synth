@@ -1,14 +1,12 @@
 # Synth
 
-### Tool for building appimages super easy!
-
 ![synth_project](https://user-images.githubusercontent.com/78444142/161784980-0322cc73-26c1-4f5c-9eff-34ac5667782f.png)
 
-SynthMotion (or just Synth) is an appimage tool that let's you build appimages for Linux super easy. Just need to locate your app and done!
+SynthMotion (or just Synth) is an appimage tool that let's you build appimages for Linux super easy. Just need to locate your app and you are ready to go.
 
 ***
 ### 📝 **Quick install**
-No needed! Since it is an AppImge it works on virtually any distro! So you just need to type:
+No needed, since it is an AppImge it works on virtually any distro! So you just need to type:
 
 ``sudo apt-get install python3-pil python3-pil.imagetk && git clone https://github.com/appvoid/synth.git && ./synth/synth.dist/synth.AppImage``
 ***

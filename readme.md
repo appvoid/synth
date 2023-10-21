@@ -57,6 +57,8 @@ Buy me a coffee! Creating this kind of things is tedious sometimes and enjoyable
 You can also spread the word! Share it with your nerd pals! Help fixing bugs! There is a lot you can do if you really wanna help me to create the most beautiful, simple and efficient way to create apps for Linux.
 
 ****
+## Apps
+If you build an app with this tool, please let me know!
 
 ## Contribuitors
 #### **Thanks to FreePik from FlatIcon**

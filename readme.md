@@ -54,7 +54,7 @@ start()
 if (NL_OS === "Linux") {
   let icon = "icon.png"
   // we asume that longer chars than "/usr/bin" (12) means there is a path
-  // so it means we are in the appimage scenario
+  // so it means we are in the appimage scenario, yeah, it's a hacky way
   
   if (dir.length > 12){
     console.log("Inside appimage")

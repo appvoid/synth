@@ -22,8 +22,8 @@ app | icon.png
 
 This is the bare minimum to make SynthMotion to compile your app into an appimage.
 
-**Note**
-
+### **Examples**
+#### Python
 If your app uses local resources, which is pretty common, you should be providing to your app the base directory path where your app is located when mounted, like this:
 
 ``$APPDIR/usr/bin/``
@@ -36,8 +36,36 @@ Now we can use assets from within the AppImage:
 
 ``icon_path = src_dir+"icon.png"``
 
-***
+#### Neutralino.js
+```
+// make sure you you have os* wildcard activated on the json settings
 
+let appimage_dir;
+let dir;
+
+async function start() {
+  appimage_dir = await Neutralino.os.execCommand('echo $APPDIR/usr/bin/');
+  dir = appimage_dir.stdOut.replaceAll("\n","");
+}
+
+start()
+
+// later in your code...
+if (NL_OS === "Linux") {
+  let icon = "icon.png"
+  // we asume that longer chars than "/usr/bin" (12) means there is a path
+  // so it means we are in the appimage scenario
+  
+  if (dir.length > 12){
+    console.log("Inside appimage")
+    // do your stuff
+    icon = dir+icon;
+  } else {
+    // do your stuff
+  }
+}
+```
+***
 ### **CLI** 💻
 There is a CLI version which is actually the main version. Essentially, this tool was designed to autoreplicate itself into an app version that replicates AppImages for your executables, but can also be used to make AppImages, actually, it's the only way to (not manually) set a category for the app.
 ****

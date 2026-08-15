@@ -99,7 +99,7 @@ For that amazing tutorial on AppImages, without him, this app wouldnt have exist
 ****
 ## Support and Troubleshooting
 If you need better answers, chat with me here:
-nohakcoffee@gmail.com
+venturaezequiel000@gmail.com
 Remember to use the topic for subject "appvoid open source + your actual subject"
 
 If an error related to FUSE appears, make sure to have installed FUSE:
